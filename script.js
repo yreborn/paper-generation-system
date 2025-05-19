@@ -581,53 +581,64 @@ document.addEventListener('DOMContentLoaded', function() {
         editor.innerHTML = templates[selectedTemplate];
     });
     
-    // 下载试卷
+    // 下载试卷为Word格式
     downloadBtn.addEventListener('click', function() {
+        // 创建一个包含Word文档XML的字符串
         const content = `
-            <!DOCTYPE html>
-            <html lang="zh-CN">
-            <head>
-                <meta charset="UTF-8">
-                <title>试卷</title>
-                <style>
-                    body {
-                        font-family: "Microsoft YaHei", Arial, sans-serif;
-                        line-height: 1.6;
-                        padding: 20px;
-                    }
-                    .exam-title {
-                        text-align: center;
-                        font-size: 24px;
-                        margin-bottom: 15px;
-                    }
-                    .exam-info {
-                        text-align: center;
-                        margin-bottom: 20px;
-                    }
-                    .section {
-                        margin-bottom: 20px;
-                    }
-                    .question {
-                        margin-bottom: 15px;
-                        padding-left: 20px;
-                    }
-                </style>
-            </head>
-            <body>
-                ${editor.innerHTML}
-            </body>
-            </html>
-        `;
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+<meta charset="utf-8">
+<title>试卷</title>
+<style>
+body {
+    font-family: "Microsoft YaHei", SimSun, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+}
+.exam-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+.exam-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.section {
+    margin-bottom: 20px;
+}
+.question {
+    margin-bottom: 15px;
+    padding-left: 20px;
+}
+</style>
+<!--[if gte mso 9]>
+<xml>
+<w:WordDocument>
+<w:View>Print</w:View>
+<w:Zoom>100</w:Zoom>
+<w:DoNotOptimizeForBrowser/>
+</w:WordDocument>
+</xml>
+<![endif]-->
+</head>
+<body>
+${editor.innerHTML}
+</body>
+</html>`;
         
-        const blob = new Blob([content], { type: 'text/html' });
+        // 创建Blob对象
+        const blob = new Blob([content], {type: 'application/msword'});
         const url = URL.createObjectURL(blob);
         
+        // 创建下载链接
         const a = document.createElement('a');
         a.href = url;
-        a.download = '试卷.html';
+        a.download = '试卷.doc';
         document.body.appendChild(a);
         a.click();
         
+        // 清理
         setTimeout(function() {
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
