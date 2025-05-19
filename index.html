@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>试卷生成系统</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>试卷生成系统</h1>
+
+        <div class="template-selection">
+            <h2>选择试卷模板</h2>
+            <select id="template-selector">
+                <option value="default">默认模板</option>
+                <option value="math">数学试卷</option>
+                <option value="language">语文试卷</option>
+                <option value="english">英语试卷</option>
+                <option value="science">科学试卷</option>
+                <option value="history">历史试卷</option>
+                <option value="custom">自定义试卷</option>
+            </select>
+            <button id="load-template">加载模板</button>
+        </div>
+
+        <div class="editor-container">
+            <h2>编辑试卷内容</h2>
+            <div id="editor" contenteditable="true">
+                <h3 class="exam-title">期末考试</h3>
+                <div class="exam-info">
+                    <p>班级：__________ 姓名：__________ 学号：__________</p>
+                    <p>时间：90分钟 满分：100分</p>
+                </div>
+                <div class="exam-content">
+                    <div class="section">
+                        <h4>一、选择题（每题5分，共20分）</h4>
+                        <div class="question">
+                            <p>1. 这里是问题内容</p>
+                            <p>A. 选项A</p>
+                            <p>B. 选项B</p>
+                            <p>C. 选项C</p>
+                            <p>D. 选项D</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+<!--            <button id="download-btn">下载试卷</button>-->
+            <button id="print-btn">打印试卷</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
